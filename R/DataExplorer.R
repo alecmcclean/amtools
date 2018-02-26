@@ -353,14 +353,6 @@ DataExplorer <- function(dataset) {
                                      "Standard Deviation" = "sd")
                           )
               ),
-
-            ###############################
-            ### Header and Disclaimer
-            ###############################
-
-            h4("Privileged and Confidential"),
-            h4("Prepared at the Request of Counsel"),
-            imageOutput("brattle_logo")
           ),
 
           ###############################
