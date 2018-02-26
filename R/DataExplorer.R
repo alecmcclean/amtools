@@ -1,6 +1,6 @@
 #' Data Explorer
 #'
-#' This function allows you to investigate a new dataset with simple visualizations. .
+#' This function allows you to investigate a new dataset with simple visualizations.
 #' @param dataset Dataset to investigate
 #' @keywords shiny, data, visualization
 #' @export
