@@ -2,7 +2,7 @@ Package: amtools
 Title: amtools
 Version: 0.0.0.9000
 Authors@R: person("Alec", "McClean", email = "mccleanalec@gmail.com", role = c("aut", "cre"))
-Description: amtools contains a set of function to help with data analysis.
+Description: amtools contains a set of functions to help with data analysis.
 Depends: R (>= 3.4.3)
 License: What license is it under?
 Encoding: UTF-8
