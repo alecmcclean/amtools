@@ -1,12 +1,12 @@
-#' Data Explorer
+#' Data Visualiser
 #'
-#' This function allows you to investigate a new dataset with simple visualizations. .
+#' This function allows you to investigate a new dataset with simple visualizations.
 #' @param dataset Dataset to investigate
 #' @keywords shiny, data, visualization
 #' @export
 #' @examples
-#' DataExplorer()
-DataExplorer <- function(dataset) {
+#' DataVisualiser()
+DataVisualiser <- function(dataset) {
 
   ### Check if data frame given
   stopifnot(is.data.frame(dataset))
@@ -353,14 +353,6 @@ DataExplorer <- function(dataset) {
                                      "Standard Deviation" = "sd")
                           )
               ),
-
-            ###############################
-            ### Header and Disclaimer
-            ###############################
-
-            h4("Privileged and Confidential"),
-            h4("Prepared at the Request of Counsel"),
-            imageOutput("brattle_logo")
           ),
 
           ###############################
