@@ -9,6 +9,6 @@
 Capitalize <- function(string) {
   paste0(
     substr(toupper(substr(string, 1, 1))),
-    substr(substr(string, 2, nchar(string)))
+    substr(string, 2, nchar(string))
   )
 }
