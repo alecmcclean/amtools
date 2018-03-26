@@ -11,10 +11,18 @@ DataVisualiser <- function(dataset) {
   ### Check if data frame given
   stopifnot(is.data.frame(dataset))
 
-  ### Load require packages
-  require(shiny)
-  require(tidyverse)
-  require(magrittr)
+  #####################
+  ### Load libraries
+  #####################
+
+  if (!require("pacman")) install.packages("pacman")
+  pacman::p_load(magrittr,
+                 tidyverse,
+                 shiny,
+                 DT,
+                 lazyeval,
+                 rlang,
+                 xtable)
 
 
   ##############################3
@@ -72,9 +80,7 @@ DataVisualiser <- function(dataset) {
   ### Categorize variables as discrete / cont
   ################################################
 
-  drop_down_list <-
-    dataset %>%
-    map(IsDiscrete)
+  drop_down_list <- map(dataset, IsDiscrete)
 
   discrete_vars <-
     drop_down_list %>%
@@ -91,8 +97,8 @@ DataVisualiser <- function(dataset) {
 
   drop_down_list <-
     drop_down_list %>%
-    lapply(function(x) as.logical(sum(x))) %>%
-    lapply(function(x) ifelse(x, " (Discrete)", " (Continuous)"))
+    map(function(x) as.logical(sum(x))) %>%
+    map(function(x) ifelse(x, " (Discrete)", " (Continuous)"))
 
   for(i in seq(drop_down_list)) {
     drop_down_list[[i]] <-
@@ -301,7 +307,7 @@ DataVisualiser <- function(dataset) {
                         label   = h4("Number of Variables to Examine"),
                         choices = c("One Variable"    = "one",
                                     "Two Variables"   = "two")
-                        ),
+            ),
 
             ### Show one variable
             conditionalPanel(
@@ -329,7 +335,7 @@ DataVisualiser <- function(dataset) {
                           label   = h4("Choose Discrete Variable to Subset and Display Multiple Plots"),
                           choice  = discrete_drop_down_list
                           )
-              ),
+            ),
 
             ### Variable to Populate Cells - must be Continuous
             conditionalPanel(
@@ -338,7 +344,7 @@ DataVisualiser <- function(dataset) {
                           label   = h4("Choose Continuous Variable to Fill Table"),
                           choice  = cont_drop_down_list
                           )
-              ),
+            ),
 
             ### Function on Variable in Pivot Table
             conditionalPanel(
@@ -352,7 +358,7 @@ DataVisualiser <- function(dataset) {
                                      "Maximum" = "max",
                                      "Standard Deviation" = "sd")
                           )
-              ),
+            )
           ),
 
           ###############################
@@ -442,16 +448,16 @@ DataVisualiser <- function(dataset) {
               textOutput("Selected_Cells"),
               plotOutput("plot_sub_histogram")
             )
-            )
           )
-        ),
+        )
+    ),
 
 
     #################################################
     ### Define server
     #################################################
 
-    server <- function(input, output) {
+    server = function(input, output) {
 
       ### User Choice
       output$x_var <- renderText({input$x_var})
@@ -463,7 +469,7 @@ DataVisualiser <- function(dataset) {
                             "Images and Photos/Logo and Print Details/Standard Logo/",
                             "RGB/Brattle RGB Medium Logo.png"),
                height = 30,
-               width = 180,
+               width  = 180,
                deleteFile = FALSE)
         })
 
@@ -497,7 +503,7 @@ DataVisualiser <- function(dataset) {
                  "Number of NAs" = sum(is.na(dataset[[input$x_var]])))
 
           return(data.frame("Stat" = names(datalist), "Value" = as.vector(unlist(datalist))))
-          })
+        })
 
       output$summary_stats_discrete_var <-
         renderTable({
@@ -689,7 +695,7 @@ DataVisualiser <- function(dataset) {
             theme_bw(axis.text.x = element_text(angle = 60, hjust = 1))
         })
 
-  	}
+    }
   )
 }
 
