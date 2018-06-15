@@ -25,36 +25,9 @@ DataVisualiser <- function(dataset) {
                  xtable)
 
 
-  ##############################3
-  ### Useful Helpder Functions
-  ##############################3
-
-  CountNum <- function(x, na.rm) {
-    ### Count function with same syntzx as mean, max, min.
-    as.integer(sum(!is.na(x)))
-  }
-
-
-  MakePrettyNumber <- function(x) {
-    ### Choose number of decimal places for
-    ### numbers in Pivot Table
-
-    size <- max(abs(x), na.rm = TRUE)
-
-    if (is.integer(x)) {
-      dec <- 0
-
-    } else {
-      dec <- 0 +
-        4 * (size <  1) +
-        3 * (size >= 1   & size < 10) +
-        2 * (size >= 10  & size < 100) +
-        1 * (size >= 100 & size < 1000)
-
-    }
-
-    sprintf(paste0("%.", dec, "f"), x)
-  }
+  ##############################
+  ### Useful Helper Function
+  ##############################
 
   IsDiscrete <- function(vector) {
     ### Tell us whether vector is discrete.
@@ -351,7 +324,7 @@ DataVisualiser <- function(dataset) {
               condition = table_condition,
               selectInput(inputId = "func",
                           label = h4("Function on Variable in Cells"),
-                          choice = c("Count"   = "CountNum",
+                          choice = c("Count"   = "amtools::CountNum",
                                      "Mean"    = "mean",
                                      "Median"  = "median",
                                      "Minimum" = "min",

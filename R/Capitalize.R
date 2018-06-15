@@ -8,7 +8,7 @@
 #' Capitalize()
 Capitalize <- function(string) {
   paste0(
-    substr(toupper(substr(string, 1, 1))),
-    substr(substr(string, 2, nchar(string)))
+    toupper(substr(string, 1, 1)),
+    substr(string, 2, nchar(string))
   )
 }
