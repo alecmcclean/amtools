@@ -6,6 +6,7 @@
 #' @export
 #' @examples
 #' MakePrettyNumber()
+#' This is a test comment
 MakePrettyNumber <- function(x) {
   size <- max(abs(x), na.rm = TRUE)
 
